@@ -1,0 +1,5 @@
+DDD/.idea/
+DDD/ApplicationLayer/obj/
+DDD/DomainLayer/obj/
+DDD/InfrastructureLayer/obj/
+DDD/PresentationLayer/obj/
