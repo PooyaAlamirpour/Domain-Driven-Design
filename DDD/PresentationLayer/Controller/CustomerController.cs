@@ -14,6 +14,21 @@ namespace PresentationLayer.Controller
             
         }
         
+        /// <summary>
+        /// Checking the customer email if it is available.
+        /// </summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST api/Employee
+        ///     {        
+        ///       "firstName": "Mike",
+        ///       "lastName": "Andrew",
+        ///       "emailId": "Mike.Andrew@gmail.com"        
+        ///     }
+        /// </remarks>
+        /// <param name="email"></param>
+        /// <returns></returns>
         [HttpGet("email")]
         public IActionResult IsEmailAvailable(string email)
         {
@@ -32,6 +47,11 @@ namespace PresentationLayer.Controller
             return Ok("GetPurchasesHistory");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">Customer is added successfully</response>
         [HttpPost("add")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
