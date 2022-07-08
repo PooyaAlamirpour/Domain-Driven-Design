@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
@@ -15,8 +18,12 @@ namespace PresentationLayer
             {
                 options.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "Title"
+                    Title = "Domain Driven Design"
                 });
+                
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
             });
         }
 
@@ -27,9 +34,10 @@ namespace PresentationLayer
             app.UseCors();
             
             app.UseSwagger()
-                .UseSwaggerUI(c =>
+                .UseSwaggerUI(option =>
                 {
-                    c.SwaggerEndpoint($"{ (string.Empty) }/swagger/v1/swagger.json", "DDD Sample.API V1");
+                    option.SwaggerEndpoint($"{ (string.Empty) }/swagger/v1/swagger.json", "DDD Sample.API V1");
+                    option.RoutePrefix = "api/docs";
                 });
 
             app.UseEndpoints(endpoints =>
