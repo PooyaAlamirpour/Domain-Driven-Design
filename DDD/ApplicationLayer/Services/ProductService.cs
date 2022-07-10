@@ -12,7 +12,10 @@ namespace ApplicationLayer.Services
 
         public ProductService(IMapper mapper, ICommandDispatcher commandDispatcher)
         {
-            _mapper = mapper;
+            var configuration = new MapperConfiguration(cfg => {
+                cfg.CreateMap<CreateProductCommand, AddNewProductViewModel>().ReverseMap();
+            });
+            _mapper = configuration.CreateMapper();
             _commandDispatcher = commandDispatcher;
         }
 
