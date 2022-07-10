@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using ApplicationLayer.Models;
@@ -25,7 +26,10 @@ namespace PresentationLayer.Controller
             try
             {
                 if (!ModelState.IsValid) return BadRequest(new {IsSuccessStatusCode = false, Errors = ModelState});
-
+                
+                //Domain
+                
+                if(Errors.Any()) return BadRequest(new { IsSuccessStatusCode = false, Errors });
                 return Ok(new {IsSuccessStatusCode = true});
             }
             catch (Exception ex)

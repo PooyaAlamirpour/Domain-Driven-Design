@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DomainLayer.Core.Notification;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PresentationLayer.Controller
 {
     public class ApiController : ControllerBase
     {
-        
+        private readonly DomainNotificationHandler _notificationHandler;
+        protected IEnumerable<string> Errors => _notificationHandler.Notifications.Select(x => x.Value);
     }
 }
