@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 using ApplicationLayer.Models;
+using ApplicationLayer.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PresentationLayer.Controller
 {
     public class ProductController : ApiController
     {
-        public ProductController()
+        private readonly IProductService _productService;
+        public ProductController(IProductService productService)
         {
-            
+            _productService = productService;
         }
 
         [HttpGet("id")]
@@ -26,8 +26,8 @@ namespace PresentationLayer.Controller
             try
             {
                 if (!ModelState.IsValid) return BadRequest(new {IsSuccessStatusCode = false, Errors = ModelState});
-                
-                //Domain
+
+                _productService.Add(model);
                 
                 if(Errors.Any()) return BadRequest(new { IsSuccessStatusCode = false, Errors });
                 return Ok(new {IsSuccessStatusCode = true});

@@ -8,7 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="DomainLayer" />
+      <Folder Include="DomainLayer\AggregatesModels\Carts" />
+      <Folder Include="DomainLayer\AggregatesModels\Customers" />
     </ItemGroup>
 
     <ItemGroup>
