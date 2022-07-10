@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using ApplicationLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PresentationLayer.Controller
@@ -19,9 +20,18 @@ namespace PresentationLayer.Controller
         }
 
         [HttpPost("Add")]
-        public IActionResult AddProduct()
+        public IActionResult AddProduct([FromBody] AddNewProductViewModel model)
         {
-            return Ok("AddProduct");
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(new {IsSuccessStatusCode = false, Errors = ModelState});
+
+                return Ok(new {IsSuccessStatusCode = true});
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { IsSuccessStatusCode = false, Errors = ex.Message });
+            }
         }
     }
 }
