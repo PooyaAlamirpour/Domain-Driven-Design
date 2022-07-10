@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Models;
+﻿using ApplicationLayer.MappingConfigurations;
+using ApplicationLayer.Models;
 using AutoMapper;
 using DomainLayer.Core.Commands;
 using DomainLayer.DomainLayer.AggregatesModels.Products.Commands;
@@ -12,10 +13,7 @@ namespace ApplicationLayer.Services
 
         public ProductService(IMapper mapper, ICommandDispatcher commandDispatcher)
         {
-            var configuration = new MapperConfiguration(cfg => {
-                cfg.CreateMap<CreateProductCommand, AddNewProductViewModel>().ReverseMap();
-            });
-            _mapper = configuration.CreateMapper();
+            _mapper = mapper;
             _commandDispatcher = commandDispatcher;
         }
 

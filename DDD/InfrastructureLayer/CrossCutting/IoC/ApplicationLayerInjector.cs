@@ -1,4 +1,5 @@
-﻿using ApplicationLayer.Services;
+﻿using ApplicationLayer.MappingConfigurations;
+using ApplicationLayer.Services;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -8,7 +9,7 @@ namespace InfrastructureLayer.CrossCutting.IoC
     {
         public static void Use(IServiceCollection services)
         {
-            services.AddScoped<IMapper>(sp => new Mapper(sp.GetRequiredService<IConfigurationProvider>(), sp.GetService));
+            services.AddScoped<IMapper>(sp => AutoMapping.RegisterMappings().CreateMapper());
             
             services.AddScoped<IProductService, ProductService>();
         }
