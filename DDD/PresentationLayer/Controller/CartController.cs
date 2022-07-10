@@ -1,4 +1,6 @@
 ﻿using System;
+using DomainLayer.Core.Notification;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PresentationLayer.Controller
@@ -7,7 +9,7 @@ namespace PresentationLayer.Controller
     [Route("api/Cart")]
     public class CartController : ApiController
     {
-        public CartController()
+        public CartController(INotificationHandler<DomainNotification> notificationHandler) : base(notificationHandler)
         {
             
         }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Net;
 using System.Threading.Tasks;
+using DomainLayer.Core.Notification;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PresentationLayer.Controller
@@ -9,7 +11,7 @@ namespace PresentationLayer.Controller
     [Route("api/Customer")]
     public class CustomerController : ApiController
     {
-        public CustomerController()
+        public CustomerController(INotificationHandler<DomainNotification> notificationHandler) : base(notificationHandler)
         {
             
         }

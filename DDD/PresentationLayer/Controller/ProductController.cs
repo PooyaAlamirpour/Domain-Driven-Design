@@ -2,6 +2,8 @@
 using System.Linq;
 using ApplicationLayer.Models;
 using ApplicationLayer.Services;
+using DomainLayer.Core.Notification;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PresentationLayer.Controller
@@ -9,7 +11,7 @@ namespace PresentationLayer.Controller
     public class ProductController : ApiController
     {
         private readonly IProductService _productService;
-        public ProductController(IProductService productService)
+        public ProductController(IProductService productService, INotificationHandler<DomainNotification> notificationHandler) : base(notificationHandler)
         {
             _productService = productService;
         }
