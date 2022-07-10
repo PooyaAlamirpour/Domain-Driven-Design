@@ -1,5 +1,7 @@
 ﻿using DomainLayer.Core.Commands;
 using DomainLayer.Core.Notification;
+using DomainLayer.DomainLayer.AggregatesModels.Products.CommandHandlers;
+using DomainLayer.DomainLayer.AggregatesModels.Products.Commands;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -14,6 +16,9 @@ namespace InfrastructureLayer.CrossCutting.IoC
             
             // Domain - Events
             services.AddScoped<INotificationHandler<DomainNotification>, DomainNotificationHandler>();
+            
+            // Domain - Commands
+            services.AddScoped<IRequestHandler<CreateProductCommand, bool>, ProductCommandHandler>();
         }
     }
 }
