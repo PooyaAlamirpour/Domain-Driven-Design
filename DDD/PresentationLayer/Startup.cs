@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using PresentationLayer.Extensions;
 
 namespace PresentationLayer
 {
@@ -29,6 +30,8 @@ namespace PresentationLayer
 
             services.AddMediatR(typeof(Startup));
             services.AddAutoMapper(typeof(Startup));
+
+            services.RegisterAllRequiredServices();
         }
 
         public void Configure(IApplicationBuilder app, IHostEnvironment env)
