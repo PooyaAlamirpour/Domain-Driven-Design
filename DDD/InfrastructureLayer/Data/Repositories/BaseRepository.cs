@@ -17,6 +17,8 @@ namespace InfrastructureLayer.Data.Repositories
         {
             _dbContext = dbContext;
         }
+
+        protected DatabaseContext GetDbContext() => _dbContext;
         
         public TEntity? FindById(Guid id) => _dbContext.Set<TEntity>().Find(id);
 
