@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using DomainLayer.DomainLayer.Models;
+using InfrastructureLayer.Data.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -22,6 +23,13 @@ namespace InfrastructureLayer.Data.Context
                 .Build();
             
             optionsBuilder.UseSqlServer(config.GetConnectionString("DefaultConnection"));
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfiguration(new ProductEntityConfiguration());
         }
     }
 }
