@@ -1,14 +1,19 @@
-﻿using System;
+﻿using System.Linq;
 using DomainLayer.DomainLayer.AggregatesModels.Products.Repository;
 using DomainLayer.DomainLayer.Models;
+using InfrastructureLayer.Data.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace InfrastructureLayer.Data.Repositories
 {
     public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
-        public Product FindByName(Product product)
+        public ProductRepository(DatabaseContext databaseContext) : base(databaseContext)
         {
-            throw new NotImplementedException();
+            
         }
+
+        public Product? FindByName(string name) =>
+            GetDbContext().Products.AsNoTracking().FirstOrDefault(x => x.Name.Equals(name)) ?? null;
     }
 }

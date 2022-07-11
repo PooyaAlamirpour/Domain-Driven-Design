@@ -5,6 +5,6 @@ namespace DomainLayer.DomainLayer.AggregatesModels.Products.Repository
 {
     public interface IProductRepository : IRepository<Product>
     {
-        Product FindByName(Product product);
+        Product? FindByName(string name);
     }
 }
